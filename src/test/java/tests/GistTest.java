@@ -16,11 +16,9 @@ public class GistTest extends tests.BaseTest {
 
         login.login(ConfigReader.get("email"), ConfigReader.get("password"));
 
-        // Klik tombol plus → pilih "New gist"
         gist.openNewGistDropdown();
         gist.clickNewGist();
 
-        // Isi dan simpan gist baru
         gist.createSecretGist(
                 "Automation Test",
                 "test.txt",
@@ -72,4 +70,23 @@ public class GistTest extends tests.BaseTest {
 
         gist.deleteFirstGist();
     }
+
+    @Test
+    public void seeListOfGists() {
+        // Page objects
+        LoginPage login = new LoginPage(driver);
+        GistPage gist = new GistPage(driver);
+        GistListPage gistList = new GistListPage(driver);
+
+        // Login
+        login.login(ConfigReader.get("email"), ConfigReader.get("password"));
+
+        // Buat Gist baru supaya tombol "Your Gists" muncul
+        gist.openNewGistDropdown();
+        gist.clickNewGist();
+
+        // Buka halaman "Your Gists"
+        gistList.openYourGists();
+    }
+
 }

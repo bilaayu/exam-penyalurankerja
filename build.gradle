@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.11.2'  // <-- plugin Allure
 }
 
 group = 'org.example'
@@ -20,10 +21,21 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
+    // Allure JUnit 5
+    testImplementation 'io.qameta.allure:allure-junit5:2.22.0'
+
     // Logger (optional, untuk hilangkan SLF4J warning)
     testImplementation 'org.slf4j:slf4j-simple:2.0.12'
 }
 
 test {
     useJUnitPlatform()
+    // Tambahkan ini supaya Allure listener jalan
+    finalizedBy 'allureReport'
+}
+
+allure {
+    version = '2.22.0'
+    autoconfigure = true
+    aspectjweaver = true
 }

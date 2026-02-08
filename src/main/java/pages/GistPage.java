@@ -50,7 +50,7 @@ public class GistPage {
     @FindBy(xpath = "//button[contains(text(),'Delete this gist')]")
     WebElement confirmDeleteBtn;
 
-    @FindBy(xpath = "//*[@id='gist-pjax-container']/div[1]/div/div/ul/li[2]/a[2]")
+    @FindBy(xpath = "//*[@id=\"gist-pjax-container\"]/div[1]/div/div/ul/li[5]/a[2]")
     WebElement yourGistsLink;
 
     @FindBy(xpath = "//a[@class='Link--muted' and contains(@href, '/qa26linemaker/')]")
@@ -146,10 +146,6 @@ public class GistPage {
 
     public void openYourGists() {
         wait.until(ExpectedConditions.elementToBeClickable(yourGistsLink)).click();
-    }
-
-    public void openFirstGist() {
-        wait.until(ExpectedConditions.elementToBeClickable(gistLinks.get(0))).click();
     }
 
     public void clickFirstEditButton() {

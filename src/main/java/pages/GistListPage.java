@@ -1,35 +1,29 @@
+// GistListPage.java
 package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public class GistListPage {
+
     WebDriver driver;
-
-    @FindBy(xpath = "//a[contains(@href,'/gist/')]")
-    public List<WebElement> gistList;
-
-    @FindBy(linkText = "Your gists")
-    WebElement yourGistsLink;
+    WebDriverWait wait;
 
     public GistListPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(xpath = "//*[@id=\"gist-pjax-container\"]/div[1]/div/div/ul/li[5]/a[2]")
+    WebElement yourGistsLink;
+
     public void openYourGists() {
-        yourGistsLink.click();
-    }
-
-    public boolean isGistListDisplayed() {
-        return gistList.size() > 0;
-    }
-
-    public void openFirstGist() {
-        gistList.get(0).click();
+        wait.until(ExpectedConditions.elementToBeClickable(yourGistsLink)).click();
     }
 }
